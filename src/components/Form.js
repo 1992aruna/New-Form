@@ -6,10 +6,10 @@ import {
 import { Box } from "@mui/system";
 import axios from "axios";
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+//import { useNavigate } from "react-router-dom";
 
 const Form = () => {
-const history = useNavigate();
+//const history = useNavigate();
   const [input, setInput] = useState({
     name: "",
     nickname: "",
@@ -27,7 +27,7 @@ const history = useNavigate();
     image1: "",
     image2: "",
     image3: "",
-    image4: "",
+    image4: ""
   });
 
   const {
@@ -50,16 +50,47 @@ const history = useNavigate();
     image4 
   } = input;
     const handleChange = (e) => {
-    setInput({ ...input, [e.target.name]: e.target.value });
-    };
-    const handleSubmit = async e => {
+    setInput((prev) => {
+      return {...prev, [e.target.name]: e.target.value}
+    });
+    console.log(input);
+  };
+    const handleSubmit = async (e) => {
       e.preventDefault();
-      await axios.post("http://localhost:3000/inputs", input);
-      history.push("/report");
-    };
-  
+      await axios.post("http://localhost:5000/form ", input )
+      .then(res => {
+      console.log(res.input);
+    }).catch (err => console.log(err))
+  setInput({
+    ...input,
+    name: "",
+    nickname: "",
+    qualification: "",
+    position: "",
+    state: "",
+    district: "",
+    village: "",
+    constituencyloksabha: "",
+    constituencyassembly: "",
+    phonenumber: "",
+    email: "",
+    facebook: "",
+    instagram: "",
+    image1: "",
+    image2: "",
+    image3: "",
+    image4: ""
+  }); 
+  };
+  //history.push("/report"); 
     return (
-      <form onSubmit={handleSubmit}>
+      <form 
+      method = "POST" 
+      onSubmit={handleSubmit} 
+      id= "inputform" 
+      name="inputform"
+      
+      >
         <Box
           display="flex"
           flexDirection="column"

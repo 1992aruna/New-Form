@@ -10,10 +10,14 @@ const Form = () => {
   }, []);
 
 const formUser = async () => {
-    const result = await axios.get("http:localhost:3000/forms,");
-    setForms(result.data.reverse);
+  try{
+    const { data } = await axios.get("http:localhost:5000/forms");
+    setForms(data);
+  } catch (err) {
+      console.log(err);
+  }
 };
-   
+  
 return (
   <div>
     <div>
@@ -27,6 +31,7 @@ return (
             <th scope="col">Qualification</th>
             <th scope="col">Position</th>
             <th scope="col">State</th>
+            <th scope="col">District</th>
             <th scope="col">Village</th>
             <th scope="col">Constituencyloksabha</th>
             <th scope="col">Constituencyassembly</th>
@@ -38,17 +43,29 @@ return (
             <th scope="col">Image 2</th>
             <th scope="col">Image 3</th>
             <th scope="col">Image 4</th>
-
-
-          </tr>
+         </tr>
         </thead>
         <tbody>
-          {forms.map((form, index) => (
+        {forms && forms.map((form) => (
             <tr>
-              <th scope="row">{index + 1}</th>
+              <th scope="row" key={form._id}></th>
               <td>{form.name}</td>
               <td>{form.nickname}</td>
               <td>{form.qualification}</td>
+              <td>{form.position}</td>
+              <td>{form.state}</td>
+              <td>{form.district}</td>
+              <td>{form.village}</td>
+              <td>{form.constituencyloksabha}</td>
+              <td>{form.constituencyassembly}</td>
+              <td>{form.phonenumber}</td>
+              <td>{form.email}</td>
+              <td>{form.facebook}</td>
+              <td>{form.instagram}</td>
+              <td>{form.image1}</td>
+              <td>{form.image2}</td>
+              <td>{form.image3}</td>
+              <td>{form.image4}</td>
             </tr>
           ))}
         </tbody>

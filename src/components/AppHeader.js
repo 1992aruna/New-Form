@@ -5,12 +5,12 @@ import { NavLink } from "react-router-dom";
 
 
 const AppHeader = () => {
-  const [value, setValue] = useState();
+  const [value, setValue] = useState(0);
   return (
     <div>
       <AppBar sx={{ backgroundColor: "#232F3D" }} position="sticky">
       <Toolbar>
-        <Typography>Form</Typography>
+        <Typography>Header</Typography>
         <Tabs
             sx={{ ml: "auto" }}
             textColor="inherit"
